@@ -13,10 +13,12 @@ namespace Tlv
 
         public async Task<ClaimsPrincipal?> Validate()
         {
+            // --
             if (!tokenHandler.CanReadToken(_jwtString))
                 return null;
 
             var jwtToken = tokenHandler.ReadJwtToken(_jwtString);
+
 
             var issuer = jwtToken.Issuer;
             var authenticationAuthority = issuer + ".well-known/openid-configuration";
@@ -27,7 +29,9 @@ namespace Tlv
             ConfigurationManager<OpenIdConnectConfiguration> configurationManager =
                                 new(authenticationAuthority,
                                     new OpenIdConnectConfigurationRetriever());
-            var openIdConfig = await configurationManager.GetConfigurationAsync(); //.Result;
+            var openIdConfig = await configurationManager.GetConfigurationAsync();
+
+            //---
 
             TokenValidationParameters tokenParameters = new()
             {

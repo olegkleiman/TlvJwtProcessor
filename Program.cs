@@ -19,7 +19,7 @@ namespace TlvJwtProcessorConsole
                 var jwtProcessor = new TlvJwtProcessor(jwtString);
                 ClaimsPrincipal? principal = await jwtProcessor.Validate();
 
-                // Extract custom from JWT claims
+                // Extract custom claims from JWT
                 var userID = principal?.FindFirst("signInNames.citizenId")?.Value;
 
             }
